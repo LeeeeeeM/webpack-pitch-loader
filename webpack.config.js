@@ -2,7 +2,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 function resolveLoader(p) {
-  return function(loader) {
+  return function (loader) {
     return path.resolve(__dirname, p, loader)
   }
 }
@@ -18,54 +18,60 @@ module.exports = {
     filename: '[name].js'
   },
   module: {
-    rules: [{
-      test: /\.js/,
-      enforce: 'pre',
-      use: ['babel-loader', {
-        loader: resolve('a'),
-        options: {
-          phase: 'pre a'
-        }
-      }, {
-        loader: resolve('b'),
-        options: {
-          phase: 'pre b'
-        }
-      }],
-      exclude: /node_modules/
-    },
-    {
-      test: /\.js/,
-      enforce: 'post',
-      use: ['babel-loader', {
-        loader: resolve('a'),
-        options: {
-          phase: 'post a'
-        }
-      }, {
-        loader: resolve('b'),
-        options: {
-          phase: 'post b'
-        }
-      }],
-      exclude: /node_modules/
-    }, 
-    {
-      test: /\.js/,
-      use: ['babel-loader', {
-        loader: resolve('a'),
-        options: {
-          phase: 'normal a'
-        }
-      }, {
-        loader: resolve('b'),
-        options: {
-          phase: 'normal b'
-        }
-      }],
-      exclude: /node_modules/
-    }
-  ]
+    rules: [
+      {
+        test: /\.js/,
+        enforce: 'pre',
+        use: [{
+          loader: resolve('a'),
+          options: {
+            phase: 'pre a'
+          }
+        }, {
+            loader: resolve('b'),
+            options: {
+              phase: 'pre b'
+            }
+          }],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.js/,
+        enforce: 'post',
+        use: [{
+          loader: resolve('a'),
+          options: {
+            phase: 'post a'
+          }
+        }, {
+            loader: resolve('b'),
+            options: {
+              phase: 'post b'
+            }
+          }],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.js/,
+        use: [{
+          loader: resolve('c'),
+          options: {
+            phase: 'normal c'
+          }
+        }, {
+            loader: resolve('b'),
+            options: {
+              phase: 'normal b'
+            }
+          }, {
+            loader: resolve('a'),
+            options: {
+              phase: 'normal a'
+            }
+          }],
+        exclude: /node_modules/
+      }
+    ]
   },
   devServer: {
     host: '0.0.0.0',
