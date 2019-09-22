@@ -13,12 +13,23 @@ module.exports = {
   entry: {
     main: path.resolve(__dirname, 'src/index.js')
   },
+  mode: 'development',
+  // devtool: 'cheap-module-source-map',
+  devtool: 'none',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js'
   },
   module: {
     rules: [
+      {
+        test: /\.txt/,
+        use: [
+          {
+            loader: resolve('x-loader')
+          }
+        ]
+      },
       {
         test: /\.js/,
         enforce: 'pre',
@@ -28,11 +39,11 @@ module.exports = {
             phase: 'pre a'
           }
         }, {
-            loader: resolve('b'),
-            options: {
-              phase: 'pre b'
-            }
-          }],
+          loader: resolve('b'),
+          options: {
+            phase: 'pre b'
+          }
+        }],
         exclude: /node_modules/
       },
       {
@@ -44,11 +55,11 @@ module.exports = {
             phase: 'post a'
           }
         }, {
-            loader: resolve('b'),
-            options: {
-              phase: 'post b'
-            }
-          }],
+          loader: resolve('b'),
+          options: {
+            phase: 'post b'
+          }
+        }],
         exclude: /node_modules/
       },
       {
@@ -59,16 +70,16 @@ module.exports = {
             phase: 'normal c'
           }
         }, {
-            loader: resolve('b'),
-            options: {
-              phase: 'normal b'
-            }
-          }, {
-            loader: resolve('a'),
-            options: {
-              phase: 'normal a'
-            }
-          }],
+          loader: resolve('b'),
+          options: {
+            phase: 'normal b'
+          }
+        }, {
+          loader: resolve('a'),
+          options: {
+            phase: 'normal a'
+          }
+        }],
         exclude: /node_modules/
       }
     ]

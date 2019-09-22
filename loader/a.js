@@ -3,7 +3,7 @@ const loaderUtils = require('loader-utils')
 module.exports = function(source) {
   const options = loaderUtils.getOptions(this)
   console.log('not pitch a', options && options.phase, options)
-  console.log(this.loaders.length, this.loaderIndex, '==== pitch')
+  console.log(this.loaders.length, this.loaderIndex, '==== not pitch')
   return source
 }
 

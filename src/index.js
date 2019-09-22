@@ -2,6 +2,6 @@
 // import a from './a'
 
 // import b from '!!./b'
+// console.log(b)
 
 console.log(1)
-
