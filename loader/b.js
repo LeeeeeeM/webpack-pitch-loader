@@ -6,10 +6,11 @@ module.exports = function(source) {
   const options = loaderUtils.getOptions(this)
   // console.log(this.loaders)
   console.log('not pitch b', options && options.phase, options)
-  this.loadModule(path.resolve(__dirname, '../src/x.txt'), function(err, txtSource, txtSourceMap) {
-    console.log(txtSource, txtSourceMap)
-    callback(null, source + txtSource)
-  })
+  // this.loadModule(path.resolve(__dirname, '../src/x.txt'), function(err, txtSource, txtSourceMap) {
+  //   console.log(txtSource, txtSourceMap)
+  //   callback(null, source + txtSource)
+  // })
+  callback(null, source)
 }
 
 module.exports.pitch = function() {
